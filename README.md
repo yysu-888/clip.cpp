@@ -126,9 +126,10 @@ example/images/panda.jpg                                                 :0.2464
 <p align="center">
   <img src="example/images/boy.jpeg" width="360x">
 </p>
+
 ## References
 
-- [ggml](https://github.com/ggerganov/ggml)
-- [stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp)
-- [clip](https://github.com/openai/CLIP)
-
+  - [ggml](https://github.com/ggerganov/ggml): https://github.com/ggerganov/ggml
+  - [stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp): https://github.com/leejet/stable-diffusion.cpp
+  - [clip](https://github.com/openai/CLIP): https://github.com/openai/CLIP
+  - [chinese-clip](https://github.com/OFA-Sys/Chinese-CLIP): https://github.com/OFA-Sys/Chinese-CLIP
