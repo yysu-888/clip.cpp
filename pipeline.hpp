@@ -16,6 +16,10 @@
 #include "ggml-metal.h"
 #endif
 
+#ifdef GGML_USE_CUDA
+#include "ggml-cuda.h"
+#endif
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -55,9 +59,24 @@ void Pipeline<VisionModel, TextModel>::model_load(std::string model_path) {
     const char* sys_info = sd_get_system_info();
     printf("%s\n", sys_info);
     ggml_backend_t backend = NULL;
+
 #ifdef GGML_USE_METAL
+    fprintf(stderr, "%s: using Metal backend\n", __func__);
+    // ggml_backend_metal_log_set_callback(ggml_log_callback_default, nullptr);
     backend = ggml_backend_metal_init();
+    if (!backend) {
+        fprintf(stderr, "%s: ggml_backend_metal_init() failed\n", __func__);
+    }
 #endif
+
+#ifdef GGML_USE_CUDA
+    fprintf(stderr, "%s: using CUDA backend\n", __func__);
+    backend = ggml_backend_cuda_init(0); 
+    if (!backend) {
+        fprintf(stderr, "%s: ggml_backend_cuda_init() failed\n", __func__);
+    }
+#endif
+
     if (!backend) {
         backend = ggml_backend_cpu_init();
     }

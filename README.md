@@ -25,6 +25,7 @@ Inference of clip model in pure C/C++
 - Accelerated memory-efficient CPU inference
 - AVX, AVX2 and AVX512 support for x86 architectures
 - Metal backend for GPU acceleration.
+- Cuda backend for GPU acceleration.
 - Supported platforms
     - Linux
     - Mac OS
@@ -51,8 +52,6 @@ Inference of clip model in pure C/C++
 ```shell
 mkdir build
 cd build
-cmake ..
-cmake --build . --config Release
 ```
 
 ##### Using Metal
@@ -61,6 +60,20 @@ cmake --build . --config Release
 cmake .. -DGGML_METAL=ON
 make -j4
 ```
+##### Using Cuda
+
+```
+cmake .. -DGGML_CUDA=ON
+make -j4
+```
+
+##### Using CPU
+
+```
+cmake ..
+make -j4
+```
+
 ### Run
 
 ```

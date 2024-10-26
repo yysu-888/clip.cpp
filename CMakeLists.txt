@@ -10,13 +10,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 option(GGML_METAL "ggml: use metal" OFF)
+option(GGML_CUDA "ggml: use cuda" OFF)
 option(CLIP_DEBUG "clip enable debug" OFF)
+
 if(GGML_METAL)
     if(APPLE)
         add_definitions(-DGGML_USE_METAL)
     else()
         message(FATAL_ERROR "FATAL: not mac  platform are not support matal.")
     endif()
+endif()
+
+
+if(GGML_CUDA)
+    add_definitions(-DGGML_USE_CUDA)
 endif()
 
 if(CLIP_DEBUG)
@@ -53,10 +60,9 @@ target_include_directories(clip PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${CMAKE_CURRENT_SOURCE_DIR}/thirty_party/utf8proc
     )
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirty_party/ggml)
+    
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirty_party/utf8proc)
-
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirty_party/ggml)
 
 
 
