@@ -7,12 +7,27 @@
 #include <sstream>
 #include <codecvt>
 
-//https://unicode.org/reports/tr15/#Norm_Forms
-//https://ssl.icu-project.org/apiref/icu4c/uchar_8h.html
+#if defined(_WIN32) || defined(_WIN64)
+const char PATH_SEPARATOR = '\\';
+#else
+const char PATH_SEPARATOR = '/';
+#endif
+
+std::string getVocabPath(const std::string& filePath) {
+    size_t pos = filePath.find_last_of(PATH_SEPARATOR);
+    std::string current_file_path;
+
+    if (pos != std::string::npos) {
+        current_file_path = filePath.substr(0, pos);
+    } else {
+        current_file_path = ".";
+    }
+    return current_file_path + std::string(1, PATH_SEPARATOR) + "vocab.txt";
+}
+
 
 std::string current_file_name = __FILE__;
-std::string current_file_path = current_file_name.substr(0,current_file_name.find_last_of("/"));
-std::string vocab_path = current_file_path + "/vocab.txt";
+std::string vocab_path = getVocabPath(current_file_name);
 
 const std::wstring stripChar = L" \t\n\r\v\f";
 using Vocab = std::unordered_map<std::wstring, size_t>;
