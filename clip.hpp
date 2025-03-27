@@ -470,11 +470,11 @@ public:
     void load_weight(std::string model_path) {
         tensors.clear();
         if (enable_vision) {
-            vision_runner->alloc_params_buffer();
+            // vision_runner->alloc_params_buffer();
             vision_runner->get_param_tensors(tensors);
         }
         if (enable_text) {
-            text_runner->alloc_params_buffer();
+            // text_runner->alloc_params_buffer();
             text_runner->get_param_tensors(tensors);
         }
         if (enable_vision || enable_vision) {
